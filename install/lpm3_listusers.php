@@ -5,10 +5,10 @@
 
 <?php
 	
-	$c = @mysql_connect($_GET['host'], $_GET['user'], $_GET['password']);
+	$c = @mysqli_connect($_GET['host'], $_GET['user'], $_GET['password']);
 	if ($c)
 	{
-		$d = @mysql_select_db($_GET['db'], $c);
+		$d = @mysqli_select_db($_GET['db'], $c);
 		if ($d)
 		{	
 			$result = mysql_query("SELECT * FROM `".$_GET['db']."`.`tbl_users`", $c) or die(mysql_error($c));
@@ -21,5 +21,5 @@
 	else
 		echo '<font color="#AA0000">Connection to database server failed.</font>';
 	
-	@mysql_close($c);
+	@mysqli_close($c);
 ?>

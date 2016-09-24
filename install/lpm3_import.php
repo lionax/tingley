@@ -1,16 +1,16 @@
 <?php
 
 	// connect to lpm3 db
-	$c = @mysql_connect($_GET['host'], $_GET['user'], $_GET['password']);
+	$c = @mysqli_connect($_GET['host'], $_GET['user'], $_GET['password']);
 	if ($c)
 	{
-		$d = @mysql_select_db($_GET['db'], $c);
+		$d = @mysqli_select_db($_GET['db'], $c);
 		if ($d)
 		{
 			
 			// connect to hfh db
 			require_once('../config/database.config.php');
-			$hfh_connection = @mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD);
+			$hfh_connection = @mysqli_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD);
 			if ($hfh_connection)
 			{
 				$hfh_db = mysql_select_db(MYSQL_DATABASE);
@@ -41,6 +41,6 @@
 	else
 		echo '<font color="#AA0000">Connection to database server failed.</font>';
 	
-	@mysql_close($c);
-	@mysql_close($hfh_connection);
+	@mysqli_close($c);
+	@mysqli_close($hfh_connection);
 ?>

@@ -1,6 +1,6 @@
 <?php
 		
-	$nickname = @mysql_real_escape_string($_GET['nickname']);
+	$nickname = @mysqli_real_escape_string($_GET['nickname']);
 	if ($nickname != '') {
 		$text = trim(strip_tags(mysql_real_escape_string($_POST['text'])));
 		if ($text != '') {

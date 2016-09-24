@@ -16,7 +16,7 @@ class poll
 	{
 		$sql="SELECT * FROM ".MYSQL_TABLE_PREFIX."poll AS P 
 			INNER JOIN ".MYSQL_TABLE_PREFIX."poll_questions AS Q ON P.ID=Q.pollID GROUP BY Q.pollID";
-		$result=@mysql_num_rows($this->db->query($sql));
+		$result=@mysqli_num_rows($this->db->query($sql));
 		return $result;
 	}
 
@@ -24,7 +24,7 @@ class poll
 	{
 		$sql="SELECT * FROM ".MYSQL_TABLE_PREFIX."poll AS P
 			INNER JOIN ".MYSQL_TABLE_PREFIX."poll_questions AS Q ON P.ID=Q.pollID WHERE P.active=1 GROUP BY Q.pollID;";
-		$result=@mysql_num_rows($this->db->query($sql));
+		$result=@mysqli_num_rows($this->db->query($sql));
 		return $result;
 	}
 
@@ -157,7 +157,7 @@ class poll
 
 	function getAllVoters($pollID)
 	{
-		$result=@mysql_fetch_assoc($this->db->query("SELECT voted FROM ".MYSQL_TABLE_PREFIX."poll WHERE ID='".(int)$pollID."';"));
+		$result=@mysqli_fetch_assoc($this->db->query("SELECT voted FROM ".MYSQL_TABLE_PREFIX."poll WHERE ID='".(int)$pollID."';"));
 		return $result['voted'];
 	}
 
@@ -188,13 +188,13 @@ class poll
 
 	function existsPoll($ID)
 	{
-		$sql=@mysql_fetch_assoc($this->db->query("SELECT * FROM ".MYSQL_TABLE_PREFIX."poll WHERE ID='".$ID."';"));
+		$sql=@mysqli_fetch_assoc($this->db->query("SELECT * FROM ".MYSQL_TABLE_PREFIX."poll WHERE ID='".$ID."';"));
 		return ($sql!="")?true:false;
 	}	
 
 	function existsQuestion($QID)
 	{
-		$sql=@mysql_fetch_assoc($this->db->query("SELECT * FROM ".MYSQL_TABLE_PREFIX."poll_questions WHERE ID='".$QID."';"));
+		$sql=@mysqli_fetch_assoc($this->db->query("SELECT * FROM ".MYSQL_TABLE_PREFIX."poll_questions WHERE ID='".$QID."';"));
 		return ($sql!="")?true:false;
 	}
 
