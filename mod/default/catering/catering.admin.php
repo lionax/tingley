@@ -27,7 +27,7 @@
 					)
 				);
 				if (@(int)$_POST['ConfigurableCheckBox'] == 1) {
-					$productid = mysql_insert_id();
+					$productid = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 					$ingredients = $db->selectList('catering_ingredients');
 					foreach ($ingredients as $i => $ingredient) {
 						if (@(int)$_POST['Ingredient_'.$ingredient['ingredientid']] == 1) {

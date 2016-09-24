@@ -91,7 +91,7 @@
 		";
 		
 		$result = $db->query($sql);
-		$uc = mysql_num_rows($result);
+		$uc = mysqli_num_rows($result);
 		
 		@$pages->setValues((int)$_GET['page'], $upp, $uc);
 		
@@ -111,7 +111,7 @@
 		
 		$result = $db->query($sql);
 		
-		while ($row = mysql_fetch_assoc($result))
+		while ($row = mysqli_fetch_assoc($result))
 			$users[] = $row;
 	
 	}
@@ -141,7 +141,7 @@
 		";
 		
 		$result = $db->query($sql);
-		$uc = mysql_num_rows($result);
+		$uc = mysqli_num_rows($result);
 		
 		$pages->setValues(@(int)$_GET['page'], $upp, $uc);
 		
@@ -165,7 +165,7 @@
 		
 		$result = $db->query($sql);
 		
-		while ($row = mysql_fetch_assoc($result))
+		while ($row = mysqli_fetch_assoc($result))
 			$users[] = $row;
 		
 		$sort['payed'] = makeURL($mod, array('eventid' => (int)$_GET['eventid'], 'page' => $page, 'order' => 'payed', 'dir' => $other_dir));

@@ -90,7 +90,7 @@
 				/* Update usage stat */
 				$sql = "SELECT * FROM `".$this->table."` WHERE `userid`=" . $login->currentUserID() . " OR `ipadress`='".$ip."' ORDER BY `timestamp` DESC LIMIT 1;";
 				$res = $db->query($sql);
-				$r = mysql_fetch_assoc($res);
+				$r = mysqli_fetch_assoc($res);
 				
 				if ($r['last_action'] + $dur < time())
 				{
@@ -266,7 +266,7 @@
 			// Get first and last day and calculate difference in days
 			$sql = "SELECT MIN(`last_action`), MAX(`last_action`) FROM `".$this->table."`;";
 			$result = $db->query($sql);
-			$row = mysql_fetch_assoc($result);
+			$row = mysqli_fetch_assoc($result);
 			$timeElapsed = $row['MAX(`last_action`)'] - $row['MIN(`last_action`)'];
 			$days = floor($timeElapsed / 86400.0);
 			
@@ -302,7 +302,7 @@
 				else
 					$sql = "SELECT * FROM `".MYSQL_TABLE_PREFIX."stat` AS `s` WHERE `timestamp` > ".$start." AND `timestamp` < ".$end . " AND `os` != 'Bot'";
 				$result = $db->query($sql);
-				$value = mysql_num_rows($result);
+				$value = mysqli_num_rows($result);
 				if ($value > $max) $max = $value;
 				$table['elements'][] = array(
 					'value' => $value,
@@ -328,7 +328,7 @@
 				else
 					$sql = "SELECT * FROM `".MYSQL_TABLE_PREFIX."stat` AS `s` WHERE `timestamp` > ".$start." AND `timestamp` < ".$end . " AND `os` != 'Bot'";
 				$result = $db->query($sql);
-				$value = mysql_num_rows($result);
+				$value = mysqli_num_rows($result);
 				if ($value > $max) $max = $value;
 				$table['elements'][] = array(
 					'value' => $value,

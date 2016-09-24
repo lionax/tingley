@@ -63,7 +63,7 @@
 	
 	$result = $db->query($sql);
 	$ulist = array();
-	while ($u = mysql_fetch_assoc($result)) {
+	while ($u = mysqli_fetch_assoc($result)) {
 		$ulist[] = $u;
 	}
 	$smarty->assign('users', $ulist);

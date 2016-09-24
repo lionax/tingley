@@ -119,8 +119,8 @@
 				$k = secureMySQL($key);
 				
 			$ti = secureMySQL($title);
-			$te = mysql_real_escape_string($text);
-			$bc = mysql_real_escape_string($box_content);
+			$te = ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $text) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
+			$bc = ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $box_content) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
 			
 			$sql = "INSERT INTO `".$this->table."` (`key`, `title`, `text`, `box_content`, `version`, `version_timestamp`, `version_author`) 
 			VALUES ('".$k."', '".$ti."', '".$te."', '".$bc."', 0, ".time().", ".$login->currentUserId().");";
@@ -149,9 +149,9 @@
 			global $db, $login;
 			$k = secureMySQL($key);
 			$ti = secureMySQL($title);
-			$te = mysql_real_escape_string($text);
+			$te = ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $text) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
 			$nk = trim(secureMySQL($newKey));
-			$bc = mysql_real_escape_string($box_content);
+			$bc = ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $box_content) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
 			
 			$page = $this->getPage($key);
 			

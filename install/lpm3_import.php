@@ -13,12 +13,12 @@
 			$hfh_connection = @mysqli_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD);
 			if ($hfh_connection)
 			{
-				$hfh_db = mysql_select_db(MYSQL_DATABASE);
+				$hfh_db = ((bool)mysqli_query($GLOBALS["___mysqli_ston"], "USE " . constant('MYSQL_DATABASE')));
 				if ($hfh_db)
 				{
 					// list old users
-					$result = mysql_query("SELECT * FROM `".$_GET['db']."`.`tbl_users`", $c) or die(mysql_error($c));
-					while ($row = mysql_fetch_assoc($result))
+					$result = mysqli_query( $c, "SELECT * FROM `".$_GET['db']."`.`tbl_users`") or die(((is_object($c)) ? mysqli_error($c) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+					while ($row = mysqli_fetch_assoc($result))
 					{
 						// import user
 						$bd = mktime(0, 0, 0, $row['month'], $row['day'], $row['year']);
@@ -26,12 +26,12 @@
 								(`email`, `password`, `nickname`, `prename`, `lastname`, `birthday`, `ban`, `activated`, `comment`)
 								VALUES
 								('".$row['email']."', '".$row['pswd']."', '".$row['nick']."', '".$row['prename']."', '".$row['lastname']."', ".(int)$bd.", ".(int)$row['banned'].", 1, '".$row['comment']."');";
-						mysql_query($sql, $hfh_connection) or die(mysql_error($hfh_connection));
+						mysqli_query( $hfh_connection, $sql) or die(((is_object($hfh_connection)) ? mysqli_error($hfh_connection) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 						
 					}
 					
 					// done
-					echo '<strong>'.mysql_num_rows($result).'</strong> users successfully imported. Click <em>Next</em> to proceed.';
+					echo '<strong>'.mysqli_num_rows($result).'</strong> users successfully imported. Click <em>Next</em> to proceed.';
 				}
 			}
 		}

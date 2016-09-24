@@ -18,7 +18,7 @@
 						OR INSTR(`" .$tbl_users . "`.`prename`, '" . secureMySQL($_POST['search_string']) . "') > 0
 						OR INSTR(`" .$tbl_users . "`.`lastname`, '" . secureMySQL($_POST['search_string']) . "') > 0)");
 		
-		while ($row = mysql_fetch_assoc($result))
+		while ($row = mysqli_fetch_assoc($result))
 			$l[] = $row;
 		
 		$smarty->assign('list', $l);

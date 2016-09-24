@@ -119,7 +119,7 @@
 										LEFT JOIN ".MYSQL_TABLE_PREFIX."media_downloads AS dl 
 										ON dlc.downloadid = dl.downloadid 
 										ORDER BY dlc.timestamp DESC LIMIT 10;");
-				while ($row = mysql_fetch_assoc($result)) {
+				while ($row = mysqli_fetch_assoc($result)) {
 					$stat['last'][] = $row;
 				}
 				

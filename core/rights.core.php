@@ -88,7 +88,7 @@
 
 			$result = $this->db->query($sql);
 			
-			if (mysql_num_rows($result) > 0)
+			if (mysqli_num_rows($result) > 0)
 				return true;
 			else
 				return false;
@@ -147,7 +147,7 @@
 				global $log;
 				$log->add('rights', 'created group ' . $name);
 				
-				return mysql_insert_id();
+				return ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 				
 			}
 		}
@@ -194,7 +194,7 @@
 			$sql = "SELECT * FROM `" . $this->table_group_rights . "` WHERE `groupid`=" . (int)$groupid . " AND `mod`='" . secureMySQL($mod) . "' AND `name`='" . secureMySQL($name) . "';";
 			$result = $this->db->query($sql);
 			
-			if (mysql_num_rows($result) == 0)
+			if (mysqli_num_rows($result) == 0)
 			{
 				$sql = "INSERT INTO `" . $this->table_group_rights . "`
 						(`groupid`, `mod`, `name`)
@@ -230,7 +230,7 @@
 			$sql = "SELECT * FROM `" . $this->table_group_users . "` WHERE `userid`=" . (int)$userid . " AND `groupid`=" . (int)$groupid . ";";
 			$result = $this->db->query($sql);
 			
-			if (mysql_num_rows($result) == 0)
+			if (mysqli_num_rows($result) == 0)
 			{
 			
 				$sql = "INSERT INTO `" . $this->table_group_users . "`
@@ -269,7 +269,7 @@
 			
 			$result = $this->db->query($sql);
 			
-			while ($group_row = mysql_fetch_assoc($result))
+			while ($group_row = mysqli_fetch_assoc($result))
 			{
 				
 				
@@ -283,7 +283,7 @@
 				$result_0 = $this->db->query($sql_0);
 				
 				// yes it has, that's enough - quit and return
-				if (mysql_num_rows($result_0) > 0)
+				if (mysqli_num_rows($result_0) > 0)
 					return true;
 			}
 			
@@ -312,7 +312,7 @@
 			
 			$result = $this->db->query($sql);
 			
-			while ($row = mysql_fetch_assoc($result))
+			while ($row = mysqli_fetch_assoc($result))
 				$list[] = $row;
 				
 			return $list;
@@ -323,7 +323,7 @@
 			$list = array();
 			$sql = "SELECT * FROM `" . $this->table_groups . "` ORDER BY `name` ASC;";
 			$result = $this->db->query($sql);
-			while ($row = mysql_fetch_assoc($result))
+			while ($row = mysqli_fetch_assoc($result))
 				$list[] = $row;
 			return $list;
 		}
@@ -332,7 +332,7 @@
 			$list = array();
 			$sql = "SELECT * FROM `" . $this->table_groups . "` WHERE `admin` = 1 ORDER BY `name` ASC;";
 			$result = $this->db->query($sql);
-			while ($row = mysql_fetch_assoc($result))
+			while ($row = mysqli_fetch_assoc($result))
 				$list[] = $row;
 			return $list;
 		}
@@ -345,7 +345,7 @@
 					ORDER BY `mod` ASC;";
 			
 			$result = $this->db->query($sql);
-			while ($row = mysql_fetch_assoc($result))
+			while ($row = mysqli_fetch_assoc($result))
 				$list[] = $row;
 				
 			return $list;
@@ -359,7 +359,7 @@
 					ORDER BY `mod` ASC;";
 			
 			$result = $this->db->query($sql);
-			while ($row = mysql_fetch_assoc($result))
+			while ($row = mysqli_fetch_assoc($result))
 				$list[] = $row;
 				
 			return $list;
@@ -369,7 +369,7 @@
 		{
 			$sql = "SELECT * FROM `" . $this->table_groups . "` WHERE `groupid`=" . (int)$groupid . " LIMIT 1;";
 			$result = $this->db->query($sql);
-			return mysql_fetch_assoc($result);
+			return mysqli_fetch_assoc($result);
 		}
 		
 		function isInGroup($groupid, $userid = -1)
@@ -384,7 +384,7 @@
 					WHERE `userid`=".$userid."
 						AND `groupid`=".$groupid." LIMIT 1;";
 			$result = $this->db->query($sql);
-			if (mysql_num_rows($result) > 0)
+			if (mysqli_num_rows($result) > 0)
 				return true;
 			else
 				return false;
@@ -418,7 +418,7 @@
             $result = $this->db->query($sql);
 			
 			$return = array();
-            while ($row = mysql_fetch_assoc($result)) {
+            while ($row = mysqli_fetch_assoc($result)) {
                 $return[] = $row;
             }
             return $return;

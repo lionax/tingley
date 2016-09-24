@@ -173,7 +173,7 @@
 										(int)$_POST['login_active'], (int)$_POST['seats'], $free, (int)$_POST['credits']
 										));
 					
-					$log->add($mod, 'event ' . mysql_insert_id() . ' created');
+					$log->add($mod, 'event ' . ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res) . ' created');
 					
 				}
 				else

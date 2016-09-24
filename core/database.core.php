@@ -31,12 +31,12 @@
 			include('./config/database.config.php');
 			
 			// Connect
-			@$this->connection = mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD);
+			@$this->connection = ($GLOBALS["___mysqli_ston"] = mysqli_connect(MYSQL_HOST,  MYSQL_USER,  MYSQL_PASSWORD));
 			if ($this->connection === false)
 				header('Location: install.php');
 			
 			// Select database
-			$result = mysql_select_db(MYSQL_DATABASE, $this->connection);
+			$result = ((bool)mysqli_query( $this->connection, "USE " . constant('MYSQL_DATABASE')));
 			if ($result === false)
 				header('Location: install.php');
 			
@@ -48,7 +48,7 @@
 		// Destructor
 		// Closes the connection at the end of the script
 		function __destruct() {
-			mysql_close($this->connection);
+			((is_null($___mysqli_res = mysqli_close($this->connection))) ? false : $___mysqli_res);
 		}
 		
 		// main query function
@@ -60,7 +60,7 @@
 			$start = microtime(true);
 			
 			// Tries to query
-			if ($result = mysql_query($query, $this->connection)) {
+			if ($result = mysqli_query( $this->connection, $query)) {
 				// Successfully
 				$this->count_successfully++;
 				$this->last_query = $query;
@@ -77,8 +77,8 @@
 				$this->count_failed++;
 				
 				die ('
-					<h1>Error: ' . 'mysql:query ' . mysql_errno($this->connection) . '</h1>
-					<p>' . mysql_error($this->connection) . '<br />' . $query . '</p>'
+					<h1>Error: ' . 'mysql:query ' . ((is_object($this->connection)) ? mysqli_errno($this->connection) : (($___mysqli_res = mysqli_connect_errno()) ? $___mysqli_res : false)) . '</h1>
+					<p>' . ((is_object($this->connection)) ? mysqli_error($this->connection) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . '<br />' . $query . '</p>'
 				);
 				
 				// debug output
@@ -106,7 +106,7 @@
 			$result = $this->query($sql);
 			
 			// append all rows to an array
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = mysqli_fetch_assoc($result)) {
 				$list[] = $row;
 			}
 			
@@ -123,7 +123,7 @@
 			
 			$sql = "SELECT `" . $field . "` FROM `" . $table . "` WHERE " . $where . $order . " LIMIT 1;";
 			$result = $this->query($sql);
-			$row = mysql_fetch_assoc($result);
+			$row = mysqli_fetch_assoc($result);
 
 			return ($row[$field]);
 		}
@@ -138,7 +138,7 @@
 			
 			$sql = "SELECT " . ($field) . " FROM `" . ($table) . "` WHERE " . ($where) . $order . " LIMIT 1;";
 			$result = $this->query($sql);
-			$row = mysql_fetch_assoc($result);
+			$row = mysqli_fetch_assoc($result);
 			
 			if ($row != false)
 			foreach ($row as $i => $r)
@@ -201,7 +201,7 @@
 			
 			$sql = "SELECT * FROM `" . $table . "` WHERE " . $where . ";";
 			$result = $this->query($sql);
-			$num = mysql_num_rows($result);
+			$num = mysqli_num_rows($result);
 			
 			return $num;
 		}
@@ -232,7 +232,7 @@
 				FROM information_schema.tables
 				WHERE table_name = '".$table."'";
 			$result = $this->query($sql);
-			if (mysql_num_rows($result) == 0)
+			if (mysqli_num_rows($result) == 0)
 				return false;
 			else
 				return true;
@@ -244,7 +244,7 @@
 			
 			// append all rows to an array
 			$list = array();
-			while ($row = mysql_fetch_assoc($result)) {	
+			while ($row = mysqli_fetch_assoc($result)) {	
 				$list[] = $row;	
 			}
 			

@@ -221,7 +221,7 @@
 		$result = $db->query($sql);
 		
 		// append all rows to an array
-		while ($row = mysql_fetch_assoc($result)) {
+		while ($row = mysqli_fetch_assoc($result)) {
 			$list[] = $row;
 		}
 

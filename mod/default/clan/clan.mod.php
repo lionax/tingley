@@ -155,7 +155,7 @@
 								"'".$_POST['description']."'", $login->currentUserId(),
 								"'".md5($_POST['password'])."'")
 						);
-						$id = mysql_insert_id();
+						$id = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 						$db->insert('clan_member',
 							array('clanid', 'userid'),
 							array($id, $login->currentUserId())

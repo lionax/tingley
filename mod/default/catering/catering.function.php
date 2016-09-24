@@ -12,7 +12,7 @@
 		$ingredientssql = $db->query("SELECT * FROM `".MYSQL_TABLE_PREFIX."catering_products_ingredients` AS pi LEFT JOIN `".MYSQL_TABLE_PREFIX."catering_ingredients` as i on `pi`.`ingredientid` = `i`.`ingredientid` WHERE `pi`.`productid`=".$productid." AND `available` > 0 ORDER BY `name` ASC");
 	
 		$ingredients = array();
-		while($ingredient = mysql_fetch_assoc($ingredientssql)) {
+		while($ingredient = mysqli_fetch_assoc($ingredientssql)) {
 			$ingredients[] = $ingredient;
 		}
 		
@@ -165,7 +165,7 @@
 				$db->insert('catering_items', 
 						array('orderid', 'productid', 'amount', 'state', 'price'),
 						array($orderid, $product['productid'],  $product['quantity'], 0, $product_DB['price']));
-				$itemid = mysql_insert_id();	
+				$itemid = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);	
 				if(isset($product['ingredients'])) {
 					foreach($product['ingredients'] as $ingredientid) {
 						$ingredient_DB = $db->selectOneRow("catering_ingredients", '*', "`ingredientid`=".$ingredientid);	
@@ -192,7 +192,7 @@
 		$db->insert('catering_orders', 
 					array('ordererid', 'date', 'isold'),
 					array("'".$login->currentUserID()."'", time(), $isold));
-		return mysql_insert_id();
+		return ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 	}
 		
 ?>

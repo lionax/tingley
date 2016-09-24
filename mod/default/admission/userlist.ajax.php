@@ -27,7 +27,7 @@
 						OR INSTR(`" .$tbl_users . "`.`lastname`, '" . secureMySQL($_GET['search_string']) . "') > 0)
 						LIMIT 10;");
 		
-		while ($row = mysql_fetch_assoc($result))
+		while ($row = mysqli_fetch_assoc($result))
 			$l[] = $row;
 		
 		$smarty->assign('search_string', $_GET['search_string']);

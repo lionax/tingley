@@ -31,7 +31,7 @@ class poll
 	function getSumOfAnswers($pollID)
 	{
 		$sql="SELECT SUM(count) AS allvotes FROM ".MYSQL_TABLE_PREFIX."poll_questions AS Q WHERE Q.pollID='".(int)$pollID."';";
-		$result=mysql_fetch_assoc($this->db->query($sql));
+		$result=mysqli_fetch_assoc($this->db->query($sql));
 		return $result['allvotes'];
 	}
 
@@ -40,7 +40,7 @@ class poll
 		global $comments;
 		$sql=$this->db->query("SELECT * FROM ".MYSQL_TABLE_PREFIX."poll WHERE active='1' ORDER BY ID DESC LIMIT ".$limit.",".$count.";");
 		$results=array();
-		while($result=mysql_fetch_assoc($sql))
+		while($result=mysqli_fetch_assoc($sql))
 		{
 			$result['name']=makeHtmlURL(makeLineBreaks($result['name']), makeURL('poll', array('pollid'=>$result['ID'])));
 			$result['commenturl']=makeURL('poll', array('pollid'=>$result['ID']))."#comments";
@@ -57,7 +57,7 @@ class poll
 	{
 		global $comments;
 		$sql=$this->db->query("SELECT * FROM ".MYSQL_TABLE_PREFIX."poll ORDER BY ".$orderby." ".$orderhow." LIMIT ".$limit.",".$count.";");
-		while($result=mysql_fetch_assoc($sql))
+		while($result=mysqli_fetch_assoc($sql))
 		{
 			$result['name']=makeHtmlURL(makeLineBreaks($result['name']), makeURL('poll', array('pollid'=>$result['ID'])));
 			$result['commenturl']=makeURL('poll', array('pollid'=>$result['ID']))."#comments";
@@ -74,7 +74,7 @@ class poll
 	function getPollByID($pollid, $userid)
 	{
 		$sql="SELECT * FROM ".MYSQL_TABLE_PREFIX."poll WHERE ID='".(int)$pollid."'";
-		$result=mysql_fetch_assoc($this->db->query($sql));
+		$result=mysqli_fetch_assoc($this->db->query($sql));
 		$result['name']=makeLineBreaks($result['name']);
 		$result['questions']=$this->getQuestionsByPollID($result['ID']);
 		$result['given_answers']=$this->getSumOfAnswers($result['ID']);
@@ -95,7 +95,7 @@ class poll
 		$sql=("SELECT * FROM ".MYSQL_TABLE_PREFIX."poll_questions WHERE pollID='".(int)$pollID."' ORDER BY ID ASC;");
 		$results=$this->db->query($sql);
 		$poll=array();
-		while($result=mysql_fetch_assoc($results))
+		while($result=mysqli_fetch_assoc($results))
 		{
 			$poll[]=$result;
 		}
@@ -231,12 +231,12 @@ class poll
 	function getQuestionByID($ID)
 	{
 		$sql="SELECT * FROM ".MYSQL_TABLE_PREFIX."poll_questions WHERE ID='".$ID."';";
-		return mysql_fetch_assoc($this->db->query($sql));
+		return mysqli_fetch_assoc($this->db->query($sql));
 	}
 
 	function isActive($ID)
 	{
-		$sql=mysql_fetch_assoc($this->db->query("SELECT active FROM ".MYSQL_TABLE_PREFIX."poll WHERE ID='".$ID."';"));
+		$sql=mysqli_fetch_assoc($this->db->query("SELECT active FROM ".MYSQL_TABLE_PREFIX."poll WHERE ID='".$ID."';"));
 		return $sql['active'];
 	}
 

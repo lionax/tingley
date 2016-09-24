@@ -58,7 +58,7 @@
 			
 			$sql = "SELECT SUM(`value`) FROM `" . $this->table . "` WHERE `userid`=".$login->currentUserID();
 			$result = $db->query($sql);
-			$row = mysql_fetch_assoc($result);
+			$row = mysqli_fetch_assoc($result);
 			
 			$balance = $row["SUM(`value`)"];
 			if ($balance >= 0)
@@ -76,7 +76,7 @@
 			
 			$sql = "SELECT SUM(`value`) FROM `" . $this->table . "` WHERE `userid`=".$login->currentUserID();
 			$result = $db->query($sql);
-			$row = mysql_fetch_assoc($result);
+			$row = mysqli_fetch_assoc($result);
 			
 			$balance = $row["SUM(`value`)"];
 			return $balance;

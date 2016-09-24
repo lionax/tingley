@@ -1,7 +1,7 @@
 <div class="headline">Step 1: Welcome</div>
 
 <p>This is the setup procedure to prepare the database for use with the LAN Party Manager IV - Higher For Hire.</p>
-<p>The installation is very easy, just follow this few steps. Needed is a MySQL database and a webserver with php support.</p>
+<p>The installation is very easy, just follow this few steps. Needed is a mysql database and a webserver with php support.</p>
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>

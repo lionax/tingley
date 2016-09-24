@@ -65,7 +65,7 @@
 								OR INSTR(`" .$tbl_users . "`.`lastname`, '" . secureMySQL($_POST['search_string']) . "') > 0)");
 				
 				$l = array();
-				while ($row = mysql_fetch_assoc($result))
+				while ($row = mysqli_fetch_assoc($result))
 					$l[] = $row;
 				
 				$smarty->assign('list', $l);
@@ -96,7 +96,7 @@
 												$_POST['lastname'], $_POST['prename'], $birthday) == 0)
 					{
 						if ((int)$_POST['eventid'] > 0)
-							$db->insert($tbl_reg, array("userid", "eventid"), array(mysql_insert_id(),(int)$_POST['eventid']));
+							$db->insert($tbl_reg, array("userid", "eventid"), array(((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res),(int)$_POST['eventid']));
 						$notify->add($lang->get('users'), $lang->get('user_add_done'));
 					}
 					else

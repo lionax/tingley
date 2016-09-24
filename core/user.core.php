@@ -64,9 +64,9 @@
 			$sql = "SELECT * FROM `" . $this->table . "` WHERE `userid`=" . (int)$userid . " LIMIT 1;";
 			$result = $this->db->query($sql);
 			
-			if (mysql_num_rows($result)> 0)
+			if (mysqli_num_rows($result)> 0)
 			{
-				$row = mysql_fetch_assoc($result);
+				$row = mysqli_fetch_assoc($result);
 				return $row;
 			} else
 				return false;
@@ -79,9 +79,9 @@
 		
 			$result = $this->db->query("SELECT * FROM `" . $this->table . "` WHERE `email`='" . $m_email . "' LIMIT 1;");
 			
-			if (mysql_num_rows($result)> 0)
+			if (mysqli_num_rows($result)> 0)
 			{
-				$row = mysql_fetch_assoc($result);
+				$row = mysqli_fetch_assoc($result);
 				return $row;
 			} else
 				return false;
@@ -97,7 +97,7 @@
 			$sql = "SELECT `email`, `nickname` FROM `" . $this->table . "` 
 					WHERE `email`='" . $m_email . "' OR `nickname`='" . $m_nickname . "' LIMIT 1;";
 			
-			if (mysql_num_rows($this->db->query($sql)) > 0)
+			if (mysqli_num_rows($this->db->query($sql)) > 0)
 				return true;
 			else
 				return false;
@@ -272,7 +272,7 @@
 					
 			$result = $this->db->query($sql);
 			
-			while ($row = mysql_fetch_assoc($result))
+			while ($row = mysqli_fetch_assoc($result))
 				$list[] = $row;
 			
 			return $list;
@@ -292,10 +292,10 @@
 					
 			$result = $this->db->query($sql);
 			
-			if (mysql_num_rows($result) == 0)
+			if (mysqli_num_rows($result) == 0)
 				return false;
 			
-			while ($row = mysql_fetch_assoc($result))
+			while ($row = mysqli_fetch_assoc($result))
 				$list[] = $row;
 			
 			return $list;
@@ -305,7 +305,7 @@
 		{
 			$sql = "SELECT * FROM `" . $this->table . "` WHERE " . $where . ";";
 			$result = $this->db->query($sql);
-			return mysql_num_rows($result);
+			return mysqli_num_rows($result);
 		}
 		
 		function activate($key)

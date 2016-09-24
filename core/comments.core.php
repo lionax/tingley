@@ -51,7 +51,7 @@
 					$log->add('comments', 'comment to module ' . $mod . ' added');
 					$this->db->insert($this->table, array("mod", "userid", "text", "timestamp", "contentid"),
 																array("'".$mod."'", (int)$userid, "'".$comment."'", time(), (int)$contentid));
-					return mysql_insert_id();
+					return ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 				}
 				else {
 					return false;
@@ -116,7 +116,7 @@
 			$sql = "SELECT * FROM `".$this->table."` WHERE `text` LIKE '%".secureMySQL($needle)."%' LIMIT 20;";
 			$result = $this->db->query($sql);
 			$list = array();
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = mysqli_fetch_assoc($result)) {
 				$u = $user->getUserByID($row['userid']);
 				$l['time'] = timeElapsed($row['timestamp']);
 				$l['nickname'] = $u['nickname'];

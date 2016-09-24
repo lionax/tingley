@@ -35,7 +35,7 @@
 			";
 			
 			$result = $db->query($sql);
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = mysqli_fetch_assoc($result)) {
 				$row['reg'] = (int)$db->num_rows('register', 
 					"`userid`=".$row['userid']." AND `eventid`=".(int)$_GET['eventid']) > 0;
 				

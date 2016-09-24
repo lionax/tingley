@@ -17,7 +17,7 @@
 					(NULL, " . $p . ", '" . $n . "', '" . $uniqid . "', '" . $lang . "');";
 		$db->query($sql);
 		
-		$catid = mysql_insert_id();
+		$catid = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 		foreach ($assigned_groupid as $group) {
 			$db->insert('media_categories_permissions', 
 				array('categoryid', 'groupid'),
@@ -36,7 +36,7 @@
 		
 		$sql = "SELECT * FROM `" . $tbl_cat . "` WHERE `parentid`=" . $cid . ";";
 		$result = $db->query($sql);
-		while ($row = mysql_fetch_assoc($result))
+		while ($row = mysqli_fetch_assoc($result))
 			removeCategory($row['categoryid']);
 		
 		$sql = "DELETE FROM `" . $tbl_cat . "` WHERE `categoryid`=" . $cid . " LIMIT 1;";
@@ -219,7 +219,7 @@
 						(NULL, '" . $n . "', '" . $d . "', '" . $f . "', '" . $v . "', " . $login->currentUserID() . ", " . time() . ", " . $c . ", '".$rn."', '".$tn."', ".$dis.");";
 			$db->query($sql);
 			
-			return mysql_insert_id();
+			return ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 		}
 	}
 	
@@ -426,7 +426,7 @@
 					
 		$db->query($sql);
 		
-		return mysql_insert_id();
+		return ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 	}
 	
 	function listMovies($categoryid)
@@ -572,7 +572,7 @@
 			LIMIT 10;"
 		);
 		
-		while ($row = mysql_fetch_assoc($result)) {
+		while ($row = mysqli_fetch_assoc($result)) {
 			$row['url'] = makeURL('media', array('categoryid' => $row['categoryid'], 'downloadid' => $row['downloadid']));
 			$row['description'] = $bbcode->parse($row['description']);
 			$items[] = $row;
@@ -609,7 +609,7 @@
 			LIMIT 10;"
 		);
 		
-		while ($row = mysql_fetch_assoc($result)) {
+		while ($row = mysqli_fetch_assoc($result)) {
 			$row['time'] = timeElapsed($row['timestamp']);
 			$row['url'] = makeURL('media', array('categoryid' => $row['categoryid'], 'downloadid' => $row['downloadid']));
 			$items[] = $row;

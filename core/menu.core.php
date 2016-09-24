@@ -84,7 +84,7 @@
 			
 			$result = $this->db->query($sql);
 			
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = mysqli_fetch_assoc($result)) {
 				if ($config->get('core', 'maintenance') == 0 || $view_menu || $row['mod'] == 'login') {
 					if ($row['mod'] != '---') {
 						$entry = array();
@@ -183,7 +183,7 @@
 			$result = $this->db->query($sql);
 			$list = array();
 			
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = mysqli_fetch_assoc($result)) {
 				$row['children'] = $this->getMenuRaw($row['menuid'], $language);
 				$row['edit_url'] = makeURL('admin', array('mode' => 'menu', 'action' => 'edit', 'menuid' => $row['menuid']));
 				$list[] = $row;
@@ -195,7 +195,7 @@
              // get highest value
 			$sql = "SELECT `order` FROM `" . $this->table . "` ORDER BY `order` DESC LIMIT 1;";
 			$result = $this->db->query($sql);
-			$row = mysql_fetch_assoc($result);
+			$row = mysqli_fetch_assoc($result);
 			
 			// current max index
 			$max = $row['order'];
@@ -275,7 +275,7 @@
 					WHERE `menuid`=" . (int)$index . ";";
 			
 			$result = $this->db->query($sql);
-			$row = mysql_fetch_assoc($result);
+			$row = mysqli_fetch_assoc($result);
 			
 			return $row['order'];
 		}
@@ -299,7 +299,7 @@
 		function getMenuCount() {
 			$sql = "SELECT * FROM `" . $this->table . "`;";
 			$result = $this->db->query($sql);
-			return mysql_num_rows($result);
+			return mysqli_num_rows($result);
 		}
 		
 		function getMenuEntry($menuid) {

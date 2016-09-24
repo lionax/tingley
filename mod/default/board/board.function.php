@@ -9,7 +9,7 @@
 		
 		$sql = "SELECT `order` FROM `" . $tbl_board . "` ORDER BY `order` DESC LIMIT 1;";
 		$result = $db->query($sql);
-		$row = mysql_fetch_assoc($result);
+		$row = mysqli_fetch_assoc($result);
 		return $row['order'] + 1;
 	}
 	
@@ -30,7 +30,7 @@
 
 			$db->query($sql);
 			
-			return mysql_insert_id();
+			return ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 		}
 		
 	}
@@ -101,7 +101,7 @@
 		
 		$db->query($sql);
 		
-		return mysql_insert_id();
+		return ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 		
 	}
 	
@@ -161,7 +161,7 @@
 			
 			$db->query($sql);
 			
-			$id = mysql_insert_id();
+			$id = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 			
 			$sql = "UPDATE `" . $tbl_thread . "` SET `lastpost`=" . $id . " WHERE `threadid`=" . (int)$threadid . ";";
 			$db->query($sql);
@@ -259,7 +259,7 @@
 		}
 		$result = $db->query($sql);
 		
-		while ($row = mysql_fetch_assoc($result))
+		while ($row = mysqli_fetch_assoc($result))
 		{
 			$row['board'] = stripslashes($row['board']);
 			$row['threads'] = numThreads($row['boardid']);
@@ -289,7 +289,7 @@
 		$sql = "SELECT * FROM `" . $tbl_thread . "`, `" . $tbl_users . "` WHERE `" . $tbl_thread . "`.`boardid`=" . (int)$boardid . " AND `" . $tbl_thread . "`.`userid`=`" . $tbl_users . "`.`userid` ORDER BY `" . $tbl_thread . "`.`sticky` DESC, `" . $tbl_thread . "`.`lastpost` DESC LIMIT " . $limit . ", " . $tpp . ";";
 		$result = $db->query($sql);
 		
-		while ($row = mysql_fetch_assoc($result))
+		while ($row = mysqli_fetch_assoc($result))
 		{
 			if ($row['sticky'] == 1)
 				$row['thread'] = makeHTMLBold($lang->get('sticky') . ":") . " " . $row['thread'];
@@ -329,7 +329,7 @@
 		
 		$i = $limit;
 		
-		while ($row = mysql_fetch_assoc($result))
+		while ($row = mysqli_fetch_assoc($result))
 		{
 			$i++;
 			$row['number'] = $i;
@@ -416,7 +416,7 @@
 		$sql = "SELECT * FROM `" . MYSQL_TABLE_PREFIX . "post` WHERE `postid`=" . (int)$postid . " LIMIT 1;";
 		$result = $db->query($sql);
 		
-		$row = mysql_fetch_assoc($result);
+		$row = mysqli_fetch_assoc($result);
 		$row['post'] = stripslashes($row['post']);
 		return $row;
 	}

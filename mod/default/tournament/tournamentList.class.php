@@ -52,7 +52,7 @@
 							  (int)$mode, (int)$playerperteam, "'".secureMySQL($picture)."'", (int)$credits, (int)$wwclgameid, "'".secureMySQL($rules)."'", 
 							  (int)$start, ((int)$duration * 60), ((int)$breaktime * 60))
 						);
-			return mysql_insert_id();
+			return ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 		}
 		
 		function editTournament($tournamentid, $eventid, $title, $playerlimit, $game, $mappool, 

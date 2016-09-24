@@ -4,7 +4,7 @@
 		$db->insert('detailedpoll', 
 					array('title', 'description', 'creator', 'date'),
 					array("'".$title."'", "'".$description."'", $user, time()));
-		return mysql_insert_id();
+		return ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 	}
 	
 	function updatePoll($pollid, $title, $description) {
@@ -53,7 +53,7 @@
 		$db->insert('detailedpoll_questions', 
 					array('detailedpollid', 'title', 'description', 'rank', 'parentid', 'percent'),
 					array((int) $pollid, "'".$title."'", "'".$description."'", (int) $rank, (int) $parentid, (int) $percent));
-		return mysql_insert_id();
+		return ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 	}
 	
 	function updateQuestion($questionid, $title, $description, $rank, $parentid, $percent) {
@@ -110,7 +110,7 @@
 		$db->insert('detailedpoll_user_answers', 
 					array('userid', 'detailedpollid', 'date'),
 					array((int) $userid, (int) $pollid, time()));
-		$useranswerid = mysql_insert_id();
+		$useranswerid = ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 		foreach($values as $questionid => $value) {
 			$db->insert('detailedpoll_answers', 
 					array('useranswerid', 'questionid', 'value'),

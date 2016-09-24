@@ -188,7 +188,7 @@ if($_GET['mod']=='poll')
 						{
 							$buttontype=(isset($_POST['buttontype']) && $_POST['buttontype']=="on")?"checkbox":"radio";
 							$poll->addPoll($_POST['pollname'], $buttontype);
-							$pollID=mysql_insert_id();
+							$pollID=((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 							foreach($_POST['question'] as $question)
 							{
 								if(trim($question)!="")

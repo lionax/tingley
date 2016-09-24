@@ -11,8 +11,8 @@
 		$d = @mysqli_select_db($_GET['db'], $c);
 		if ($d)
 		{	
-			$result = mysql_query("SELECT * FROM `".$_GET['db']."`.`tbl_users`", $c) or die(mysql_error($c));
-			echo '<p><strong>' . mysql_num_rows($result) . '</strong> Users found.</p>
+			$result = mysqli_query( $c, "SELECT * FROM `".$_GET['db']."`.`tbl_users`") or die(((is_object($c)) ? mysqli_error($c) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
+			echo '<p><strong>' . mysqli_num_rows($result) . '</strong> Users found.</p>
 				<p><input type="button" name="do_import" value="Import users now" onClick="javascript:import();" /></p>';
 		}
 		else

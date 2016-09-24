@@ -97,11 +97,11 @@
 					AND `value`=".$userid."
 					AND `type`=13";
 				$result = $db->query($sql);
-				if (mysql_num_rows($result) == 0) {
+				if (mysqli_num_rows($result) == 0) {
 					$events[$i]['seat'] = '-';
 				}
 				else {
-					$row = mysql_fetch_assoc($result);
+					$row = mysqli_fetch_assoc($result);
 					$events[$i]['seat'] = strtoupper(chr($row['y']+97)) . ($row['x'] + 1);
 					$events[$i]['seat_url'] = makeURL('room', array('roomid' => $row['roomid']));
 				}

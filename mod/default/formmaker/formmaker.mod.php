@@ -32,7 +32,7 @@
 						)
 					);
 					$notify->add($lang->get('formmaker'), $lang->get('save_done'));
-					redirect(makeURL($mod, array('formid' => mysql_insert_id())));
+					redirect(makeURL($mod, array('formid' => ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res))));
 				}
 				break;
 			case 'records':

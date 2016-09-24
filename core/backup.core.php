@@ -12,7 +12,7 @@
 			global $db;
 			
 			$result = $db->query("SHOW TABLES");
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = mysqli_fetch_array($result)) {
 				$tables[] = $row[0];
 			}
 			return $tables;

@@ -99,7 +99,7 @@
 					ORDER BY `".$tbl_g."`.`groupid`;";
 			$result = $db->query($sql);
 			
-			while ($row = mysql_fetch_assoc($result)) {
+			while ($row = mysqli_fetch_assoc($result)) {
 				$list[$row['mod'].' / '.$row['right_name']][$row['group_name']] = 'X'; 
 			}
 			

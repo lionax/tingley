@@ -2,7 +2,7 @@
 		
 	$nickname = @mysqli_real_escape_string($_GET['nickname']);
 	if ($nickname != '') {
-		$text = trim(strip_tags(mysql_real_escape_string($_POST['text'])));
+		$text = trim(strip_tags(((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['text']) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""))));
 		if ($text != '') {
 			$db->insert(MYSQL_TABLE_PREFIX.'tetris_chat',
 				array('type', 'nickname', 'text'),

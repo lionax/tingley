@@ -12,7 +12,7 @@
 					OR INSTR(U.`lastname`, '" . secureMySQL($_GET['search_string']) . "') > 0)
 					LIMIT 5;");
 	
-	while ($row = mysql_fetch_assoc($result)){
+	while ($row = mysqli_fetch_assoc($result)){
 		$dummy = $row;
 		$registered = $db->selectOneRow($tbl_register, '*', "userid=".$dummy['userid']." AND eventid=".(int)$_GET['eventid']);
 		

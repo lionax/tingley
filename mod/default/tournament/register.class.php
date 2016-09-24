@@ -116,7 +116,7 @@
 						   WHERE `".$tbl_reg."`.`tournamentid`=".$tournament['tournamentid']." 
 						   AND `".$tbl_users."`.`userid`=`".$tbl_reg."`.`memberid`");
 				
-				while ($row = mysql_fetch_assoc($result))
+				while ($row = mysqli_fetch_assoc($result))
 				{
 					$row['url'] = makeURL('profile', array('userid' => $row['userid']));
 					$list[] = $row;
@@ -152,7 +152,7 @@
 						   AND `".$tbl_users."`.`userid`=`".$tbl_reg."`.`memberid`");
 				
 				$list = array();
-				while ($row = mysql_fetch_assoc($result))
+				while ($row = mysqli_fetch_assoc($result))
 				{
 					$player = new singlePlayer($row);
 					$list[] = $player;
@@ -193,7 +193,7 @@
 				$db->insert($this->table_g, array('name', 'password', 'founderid', 'description', 'tournamentid'),
 							array("'".$name."'", "'".md5($password)."'", $login->currentUserID(), "'".$description."'", $tournamentid));
 							
-				return mysql_insert_id();
+				return ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res);
 				
 			}
 		}

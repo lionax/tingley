@@ -1,5 +1,5 @@
 <div class="headline">Step 3: Database</div>
-<p>Please enter here the access data for your MySQL database.</p>
+<p>Please enter here the access data for your mysql database.</p>
 
 <script type="text/javascript">
   function contentloader() {

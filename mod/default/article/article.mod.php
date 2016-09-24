@@ -63,7 +63,7 @@
 						$db->update('article', 
 							"`title`='".secureMySQL($article['title'])."', 
 							`preview`='".secureMySQL($article['preview'])."', 
-							`text`='".mysql_real_escape_string($article['text'])."', 
+							`text`='".((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $article['text']) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""))."', 
 							`categoryid`=".$article['categoryid'].",
 							`published`=".$article['published'], 
 							"`articleid`=".$articleid
@@ -103,7 +103,7 @@
 						$db->query("INSERT INTO `".MYSQL_TABLE_PREFIX."article` 
 						(categoryid, authorid, timestamp, title, preview, `text`, `published`)
 						VALUES
-						(".$article['categoryid'].", ".$login->currentUserId().", ".time().", '".secureMySQL($article['title'])."', '".secureMySQL($article['preview'])."', '".mysql_real_escape_string($article['text'])."', ".$article['published'].");");
+						(".$article['categoryid'].", ".$login->currentUserId().", ".time().", '".secureMySQL($article['title'])."', '".secureMySQL($article['preview'])."', '".((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $article['text']) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""))."', ".$article['published'].");");
 						
 						$notify->add($lang->get('article'), $lang->get('write_done'));
 					}

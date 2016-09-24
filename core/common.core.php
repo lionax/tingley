@@ -70,11 +70,11 @@
 		if ($config->get('core', 'allow-html-tags') != '1') {
 			$input = strip_tags($input);
 		}
-		return 	mysql_real_escape_string(
+		return 	((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], 
 					convertLineBreaks (
 						$input
 					)
-				);
+				) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
 		
 	}
 	

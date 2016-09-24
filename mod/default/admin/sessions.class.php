@@ -15,7 +15,7 @@
 			$sql = "SELECT * FROM `" . $tbl_users . "` WHERE `lastaction`>=" . $time;
 			$result = $db->query($sql);
 			
-			while ($row = mysql_fetch_assoc($result))
+			while ($row = mysqli_fetch_assoc($result))
 			{
 				$row['str_lastaction'] = timeElapsed($row['lastaction']);
 				$row['url'] = makeURL('profile', array('userid' => $row['userid']));

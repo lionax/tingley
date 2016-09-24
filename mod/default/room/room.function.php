@@ -206,7 +206,7 @@
 										INNER JOIN ".MYSQL_TABLE_PREFIX . "room AS R
 										ON I.roomid=R.roomid
 										WHERE type='".$type."' AND value='".(int)$userid."' AND eventid='".(int)$eventid."'";
-		$dummy = mysql_fetch_assoc($db->query($sql));
+		$dummy = mysqli_fetch_assoc($db->query($sql));
 		return isset($dummy) && $dummy!=null;
 	}
 	

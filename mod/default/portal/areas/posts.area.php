@@ -45,7 +45,7 @@
 						LIMIT $limit;");
 		}
 		$list=array();
-		while($list_entry=mysql_fetch_assoc($sql))
+		while($list_entry=mysqli_fetch_assoc($sql))
 			$list[]=$list_entry;
 		
 		if (null != $list && count($list) > 0) {

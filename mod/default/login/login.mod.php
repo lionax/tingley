@@ -101,7 +101,7 @@
 								$text .= $lang->get('nickname').': '.strip_tags($_POST['nickname']).'<br />';
 								$text .= $lang->get('prename').': '.strip_tags($_POST['prename']).'<br />';
 								$text .= $lang->get('lastname').': '.strip_tags($_POST['lastname']).'<br />';
-								$text .= '<a href="'.getSelfURL().'/'.makeURL('profile', array('userid' => mysql_insert_id())).'">'.$lang->get('view_profile').'</a></p>';
+								$text .= '<a href="'.getSelfURL().'/'.makeURL('profile', array('userid' => ((is_null($___mysqli_res = mysqli_insert_id($GLOBALS["___mysqli_ston"]))) ? false : $___mysqli_res))).'">'.$lang->get('view_profile').'</a></p>';
 								$eMail->send($lang->get('register_mail_notification_subject'), $text, $addr);
 							}
 						}

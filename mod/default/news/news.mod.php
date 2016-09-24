@@ -73,7 +73,7 @@
 												AND (`domainid` = 0 OR `domainid` = ".getCurrentDomainIndex().")
 												ORDER BY `timestamp` DESC;");
 				
-				while ($row = mysql_fetch_assoc($result))
+				while ($row = mysqli_fetch_assoc($result))
 				{
 					$row['time'] = timeElapsed($row['timestamp']);
 					$row['url'] = makeURL('news', array('newsid' => $row['newsid']));
@@ -84,7 +84,7 @@
 					$news[] = $row;
 				}
 				
-				return array('title' => $title, 'news' => $news, 'news_count' => mysql_num_rows($result));
+				return array('title' => $title, 'news' => $news, 'news_count' => mysqli_num_rows($result));
 			}
 			
 			$breadcrumbs->addElement($lang->get('archive'), makeURL($mod, array('mode' => 'archive')));
@@ -141,7 +141,7 @@
 											WHERE `" . $table . "`.`userid` = `" . $tbl_users . "`.`userid`
 											ORDER BY `timestamp` DESC;");
 					
-					while ($row = mysql_fetch_assoc($result))
+					while ($row = mysqli_fetch_assoc($result))
 					{
 						if (isset($_POST['remove']) && @(int)$_POST['remove_'.$row['newsid']] == 1)
 							$db->delete($table, "`newsid`=" . $row['newsid']);
@@ -280,7 +280,7 @@
 										AND (`language` = '".secureMySQL($lng)."' OR `language`='')
 										AND (`domainid` = 0 OR `domainid` = ".getCurrentDomainIndex().")
 										ORDER BY `timestamp` DESC LIMIT " . $limit . ";");
-				while ($row = mysql_fetch_assoc($result))
+				while ($row = mysqli_fetch_assoc($result))
 				{
 					$author = $user->getUserByID($row['userid']);
 					
